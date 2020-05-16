@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_143516) do
+ActiveRecord::Schema.define(version: 2020_05_16_144251) do
 
   create_table "animes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "canonical_title"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_143516) do
     t.string "episode_length"
     t.string "total_length"
     t.string "youtube_video_id"
+    t.integer "kitsu_id"
     t.boolean "nsfw"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
