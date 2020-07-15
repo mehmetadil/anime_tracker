@@ -1,0 +1,10 @@
+<ul data-target="anime.searchResult" class="list-group">
+  <% @animes.each do |anime| %>
+    <%= link_to anime_path(anime) do %>
+      <li class="list-group-item">
+        <%= image_tag(anime.images.first.url, size: "60x60") %>
+        <span><%= anime.canonical_title %></span>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

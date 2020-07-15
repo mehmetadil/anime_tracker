@@ -8,10 +8,7 @@ class AnimesController < ApplicationController
   end
 
   def search
-    @anime = Anime.first
-
-    respond_to do |format|
-      format.json { render json: @anime }
-    end
+    @animes = Kitsu::AnimeApi.index(q: params[:q])
+    render :search, layout: false
   end
 end

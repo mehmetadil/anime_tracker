@@ -9,10 +9,16 @@ module Kitsu
       image_columns = %i[cover_image poster_image]
       data.deep_transform_keys! { |key| key.to_s.underscore.to_sym }
       data[:attributes][:kitsu_id] = data[:id]
-      data[:attributes][:titles] = data[:attributes][:titles].map { |language, title| "#{language}??#{title}" }.join('::')
+      if data[:attributes][:titles].present?
+        data[:attributes][:titles] = data[:attributes][:titles].map { |language, title| "#{language}??#{title}" }.join('::')
+      end
 
-      anime = Anime.new data[:attributes].slice(*anime_columns)
-      anime.images << set_images(data[:attributes].slice(*image_columns)).compact
+      anime = Anime.find_by(kitsu_id: data[:attributes][:kitsu_id])
+      unless anime
+        anime = Anime.new data[:attributes].slice(*anime_columns)
+        anime.images << set_images(data[:attributes].slice(*image_columns)).compact
+        anime.save
+      end
       anime
     end
 
